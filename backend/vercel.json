@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/gerar-planilha.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/gerar-planilha",
+      "dest": "/api/gerar-planilha.js"
+    }
+  ]
+}

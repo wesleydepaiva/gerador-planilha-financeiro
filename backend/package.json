@@ -1,0 +1,13 @@
+{
+  "name": "backend-planilha",
+  "version": "1.0.0",
+  "dependencies": {
+    "xlsx": "^0.18.5",
+    "stream": "^0.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "type": "module"
+}
