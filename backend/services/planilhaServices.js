@@ -28,6 +28,17 @@ export async function gerarPlanilha(
   }
 
   const worksheet = XLSX.utils.json_to_sheet(dados);
+
+  // Ajuste automático da largura das colunas
+  const colWidths = Object.keys(dados[0]).map((key) => {
+    const maxLength = Math.max(
+      key.length,
+      ...dados.map((row) => String(row[key]).length)
+    );
+    return { wch: maxLength + 2 }; // padding extra
+  });
+  worksheet["!cols"] = colWidths;
+
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "Simulacao");
 
