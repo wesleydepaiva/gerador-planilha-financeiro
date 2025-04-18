@@ -3,9 +3,10 @@ import XLSX from "xlsx";
 export async function gerarPlanilha(
   valorContrato,
   quantidadeUsuarios,
-  valorUsuarioAdicional
+  valorUsuarioAdicional,
+  quantidadeUsuariosAdicionais
 ) {
-  const usuariosTotais = quantidadeUsuarios + 20;
+  const usuariosTotais = quantidadeUsuarios + quantidadeUsuariosAdicionais;
   const dados = [];
 
   for (let i = 1; i <= usuariosTotais; i++) {

@@ -2,25 +2,30 @@ import { gerarPlanilha } from "../services/planilhaServices.js";
 import { Readable } from "stream";
 
 export default async function handler(req, res) {
-  // Habilita CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") {
-    return res.status(200).end(); // responde ao preflight
+    return res.status(200).end();
   }
 
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Método não permitido" });
   }
 
-  const { valorContrato, quantidadeUsuarios, valorUsuarioAdicional } = req.body;
+  const {
+    valorContrato,
+    quantidadeUsuarios,
+    valorUsuarioAdicional,
+    quantidadeUsuariosAdicionais,
+  } = req.body;
 
   if (
     typeof valorContrato !== "number" ||
     typeof quantidadeUsuarios !== "number" ||
-    typeof valorUsuarioAdicional !== "number"
+    typeof valorUsuarioAdicional !== "number" ||
+    typeof quantidadeUsuariosAdicionais !== "number"
   ) {
     return res.status(400).json({ error: "Todos os campos devem ser números" });
   }
@@ -29,7 +34,8 @@ export default async function handler(req, res) {
     const buffer = await gerarPlanilha(
       valorContrato,
       quantidadeUsuarios,
-      valorUsuarioAdicional
+      valorUsuarioAdicional,
+      quantidadeUsuariosAdicionais
     );
 
     res.setHeader("Content-Disposition", "attachment; filename=simulacao.xlsx");
